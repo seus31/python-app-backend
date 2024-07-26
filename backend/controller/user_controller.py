@@ -1,5 +1,5 @@
-from backend.service.user_service import get_user_logic
-from backend.service.user_service import post_user_logic
+from service.user_service import get_user_logic
+from service.user_service import post_user_logic
 
 
 def get_user():
