@@ -12,12 +12,11 @@ class User(db.Model):
     created_at = db.Column(Timestamp, server_default=current_timestamp(), nullable=False)
     updated_at = db.Column(Timestamp, server_default=current_timestamp(), nullable=False)
 
-    # Contructor
-    def __init__(self, id, name, created_at, updated_at):
-        self.id = id
+    # Contractor
+    def __init__(self, name, email, password):
         self.name = name
-        self.created_at = created_at
-        self.updated_at = updated_at
+        self.email = email
+        self.password = password
 
     def __repr__(self):
         return '<User %r>' % self.name
@@ -37,7 +36,9 @@ class User(db.Model):
 
     def create_user(user):
         record = User(
-            name=user['name'],
+            name=user.name,
+            password=user.password,
+            email = user.email
         )
         db.session.add(record)
         db.session.commit()
