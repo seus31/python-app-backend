@@ -10,17 +10,20 @@ router = Blueprint('router', __name__)
 with open("./config/logging.json", "r", encoding="utf-8") as f:
   config.dictConfig(load(f))
 
-@router.route("/", methods=['GET'])
-@logger.http_request_logging
-@auth.requires_auth
-def hello_world():
-    return "Hello World!!"
 
-@router.route("/api/v1/users/getUserList", methods=['GET'])
+@router.route("/api/v1/users", methods=['GET'])
 @logger.http_request_logging
 @auth.requires_auth
 def api_v1_users_get_user_list():
     return user_controller.get_user()
+
+
+@router.route("/api/v1/users", methods=['POST'])
+@logger.http_request_logging
+@auth.requires_auth
+def api_v1_users_post_user():
+    return user_controller.post_user()
+
 
 @router.after_request
 def after_request(response):
