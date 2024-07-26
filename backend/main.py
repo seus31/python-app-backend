@@ -5,13 +5,12 @@ import router
 from config import config
 import db
 
+
 def create_app():
     app = Flask(__name__)
 
     app.config.from_object(config.Config)
     db.init_db(app)
-    db.init_ma(app)
-
     app.register_blueprint(router.router)
 
     app.config['JSON_AS_ASCII'] = False
@@ -23,6 +22,7 @@ def create_app():
         }
     )
     return app
+
 
 app = create_app()
 if __name__ == "__main__":
