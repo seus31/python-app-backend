@@ -3,7 +3,7 @@ from model.user import User, UserSchema
 from werkzeug.security import generate_password_hash
 
 
-def get_user_logic():
+def get_users_logic():
     users = User.get_user_list()
     user_schema = UserSchema(many=True)
     return make_response(jsonify({
@@ -46,3 +46,12 @@ def post_user_logic():
             'user': user_schema.dump(new_user)
         })
     )
+
+
+def get_user_logic(user_id):
+    user = User.query.get_or_404(user_id)
+    user_schema = UserSchema()
+    return make_response(jsonify({
+        'code': 200,
+        'user': user_schema.dump(user)
+    }))
