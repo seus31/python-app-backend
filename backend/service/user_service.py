@@ -3,7 +3,7 @@ from model.user import User, UserSchema
 from werkzeug.security import generate_password_hash
 
 
-def get_user_logic():
+def get_users_logic():
     users = User.get_user_list()
     user_schema = UserSchema(many=True)
     return make_response(jsonify({
