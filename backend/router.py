@@ -25,6 +25,13 @@ def api_v1_users_post_user():
     return user_controller.post_user()
 
 
+@router.route('/api/v1/users/<int:user_id>', methods=['GET'])
+@logger.http_request_logging
+@auth.requires_auth
+def get_user(user_id):
+    return user_controller.get_user(user_id)
+
+
 @router.after_request
 def after_request(response):
   response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
