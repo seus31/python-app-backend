@@ -15,7 +15,7 @@ with open("./config/logging.json", "r", encoding="utf-8") as f:
 @logger.http_request_logging
 @auth.requires_auth
 def api_v1_users_get_user_list():
-    return user_controller.get_user()
+    return user_controller.get_users()
 
 
 @router.route("/api/v1/users", methods=['POST'])
