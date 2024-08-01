@@ -46,3 +46,12 @@ def post_user_logic():
             'user': user_schema.dump(new_user)
         })
     )
+
+
+def get_user_logic(user_id):
+    user = User.query.get_or_404(user_id)
+    user_schema = UserSchema()
+    return make_response(jsonify({
+        'code': 200,
+        'user': user_schema.dump(user)
+    }))
