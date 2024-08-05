@@ -32,13 +32,6 @@ def get_user(user_id):
     return user_controller.get_user(user_id)
 
 
-@router.route('/api/v1/users/<int:user_id>', methods=['PUT'])
-@logger.http_request_logging
-@auth.requires_auth
-def update_user(user_id):
-    return user_controller.update_user(user_id)
-
-
 @router.after_request
 def after_request(response):
   response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')

@@ -1,7 +1,6 @@
 from db import db, ma
 from sqlalchemy.dialects.mysql import TIMESTAMP as Timestamp
 from sqlalchemy.sql.functions import current_timestamp
-from werkzeug.security import generate_password_hash
 
 
 class User(db.Model):
@@ -23,6 +22,7 @@ class User(db.Model):
         return '<User %r>' % self.name
 
     def get_user_list():
+        # SELECT * FROM users
         user_list = db.session.query(User).all()
         if user_list is None:
             return []
@@ -43,14 +43,6 @@ class User(db.Model):
         db.session.add(record)
         db.session.commit()
         return user
-
-    def update_user(user, updated_data):
-        for key, value in updated_data.items():
-            if key == 'password':
-                value = generate_password_hash(value)
-            setattr(user, key, value)
-
-        db.session.commit()
 
 
 class UserSchema(ma.SQLAlchemyAutoSchema):

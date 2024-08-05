@@ -1,5 +1,4 @@
 from flask import make_response, request, jsonify
-from marshmallow import ValidationError
 from model.user import User, UserSchema
 from werkzeug.security import generate_password_hash
 
@@ -52,24 +51,6 @@ def post_user_logic():
 def get_user_logic(user_id):
     user = User.query.get_or_404(user_id)
     user_schema = UserSchema()
-    return make_response(jsonify({
-        'code': 200,
-        'user': user_schema.dump(user)
-    }))
-
-
-def update_user_logic(user_id):
-    user = User.query.get_or_404(user_id)
-    data = request.json
-
-    try:
-        user_schema = UserSchema()
-        updated_data = user_schema.load(data, partial=True)
-    except ValidationError as err:
-        return jsonify(err.messages), 400
-
-    user.update_user(updated_data)
-
     return make_response(jsonify({
         'code': 200,
         'user': user_schema.dump(user)
