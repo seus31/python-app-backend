@@ -39,6 +39,13 @@ def update_user(user_id):
     return user_controller.update_user(user_id)
 
 
+@router.route('/api/v1/users/<int:user_id>', methods=['DELETE'])
+@logger.http_request_logging
+@auth.requires_auth
+def delete_user(user_id):
+    return user_controller.delete_user(user_id)
+
+
 @router.after_request
 def after_request(response):
   response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
