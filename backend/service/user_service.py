@@ -74,3 +74,13 @@ def update_user_logic(user_id):
         'code': 200,
         'user': user_schema.dump(user)
     }))
+
+
+def delete_user_logic(user_id):
+    user = User.query.get_or_404(user_id)
+    user.delete_user()
+
+    return make_response(jsonify({
+        'code': 200,
+        'message': 'User deleted successfully'
+    }))
