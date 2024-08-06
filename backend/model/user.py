@@ -34,22 +34,26 @@ class User(db.Model):
             .filter(User.id == id) \
             .one()
 
-    def create_user(user):
+    def create_user(self):
         record = User(
-            name=user.name,
-            password=user.password,
-            email = user.email
+            name=self.name,
+            password=self.password,
+            email=self.email
         )
         db.session.add(record)
         db.session.commit()
-        return user
+        return self
 
-    def update_user(user, updated_data):
+    def update_user(self, updated_data):
         for key, value in updated_data.items():
             if key == 'password':
                 value = generate_password_hash(value)
-            setattr(user, key, value)
+            setattr(self, key, value)
 
+        db.session.commit()
+
+    def delete_user(self):
+        db.session.delete(self)
         db.session.commit()
 
 
