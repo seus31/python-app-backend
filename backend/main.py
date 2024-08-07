@@ -17,7 +17,7 @@ def create_app():
     app.config["JSON_SORT_KEYS"] = False
     CORS(
         app,
-        resources = {
+        resources={
             r"/api/*": {"origins": ["http://localhost", "http://localhost:4200"]}
         }
     )
