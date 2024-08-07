@@ -19,7 +19,6 @@ def post_user_logic():
     email = data.get('email')
     password = data.get('password')
     password_confirm = data.get('password_confirm')
-    print(username, email, password, password_confirm)
 
     if not username or not email or not password or not password_confirm:
         return make_response(
