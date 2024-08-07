@@ -1,5 +1,6 @@
 import settings
 
+
 class SystemConfig:
     # Flask
     DEBUG = True
@@ -13,5 +14,6 @@ class SystemConfig:
     })
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ECHO = False
+
 
 Config = SystemConfig

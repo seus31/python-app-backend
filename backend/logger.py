@@ -1,6 +1,7 @@
 from flask import request, current_app
 from functools import wraps
 
+
 def http_request_logging(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -11,4 +12,5 @@ def http_request_logging(f):
             logger.exception(e)
             pass
         return f(*args, **kwargs)
+
     return decorated_function

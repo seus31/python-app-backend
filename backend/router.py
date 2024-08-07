@@ -1,4 +1,6 @@
 from flask import Blueprint
+
+from controller import task_controller
 from controller import user_controller
 from logging import config
 from json import load
@@ -8,7 +10,7 @@ import logger
 router = Blueprint('router', __name__)
 
 with open("./config/logging.json", "r", encoding="utf-8") as f:
-  config.dictConfig(load(f))
+    config.dictConfig(load(f))
 
 
 @router.route("/api/v1/users", methods=['GET'])
@@ -46,8 +48,15 @@ def delete_user(user_id):
     return user_controller.delete_user(user_id)
 
 
+@router.route("/api/v1/tasks", methods=['POST'])
+@logger.http_request_logging
+@auth.requires_auth
+def api_v1_tasks_post_task():
+    return task_controller.post_task()
+
+
 @router.after_request
 def after_request(response):
-  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-  return response
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
