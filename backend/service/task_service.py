@@ -23,3 +23,12 @@ def post_task_logic():
             'task': task_schema.dump(new_task)
         })
     )
+
+
+def get_tasks_logic():
+    tasks = Task.get_task_list()
+    task_schema = TaskSchema(many=True)
+    return make_response(jsonify({
+        'code': 200,
+        'tasks': task_schema.dump(tasks)
+    }))
