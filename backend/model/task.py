@@ -28,6 +28,13 @@ class Task(db.Model):
         db.session.commit()
         return self
 
+    def get_task_list():
+        task_list = db.session.query(Task).all()
+        if task_list is None:
+            return []
+        else:
+            return task_list
+
 
 class TaskSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
