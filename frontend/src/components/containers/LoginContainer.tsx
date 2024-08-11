@@ -21,16 +21,17 @@ const LoginContainer = () => {
             })
             login(response.data.access_token)
         } catch (error) {
+            alert('Login failed')
         }
     }
 
     const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value)
-    };
+    }
 
     const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value)
-    };
+    }
 
   return (
         <LoginForm handleLogin={handleLogin} handleEmailChange={handleEmailChange} handlePasswordChange={handlePasswordChange} />
