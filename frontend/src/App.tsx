@@ -8,6 +8,7 @@ import { ApiProvider } from './providers/ApiContext'
 import { AuthProvider } from './providers/AuthContext'
 import DashboardContainer from './components/containers/DashboardContainer'
 import LoginContainer from './components/containers/LoginContainer'
+import RegisterContainer from './components/containers/RegisterContainer'
 
 const mdTheme = createTheme({
   palette: {
@@ -26,6 +27,7 @@ const App: React.FC = () => {
               <ApiProvider apiUrl={apiUrl}>
                 <Routes>
                   <Route path="/login" Component={LoginContainer} />
+                  <Route path="/register" Component={RegisterContainer} />
                   <Route path="/dashboard" Component={DashboardContainer} />
                 </Routes>
               </ApiProvider>
