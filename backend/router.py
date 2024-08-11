@@ -14,6 +14,12 @@ with open("./config/logging.json", "r", encoding="utf-8") as f:
     config.dictConfig(load(f))
 
 
+@router.route("/api/v1/register", methods=['POST'])
+@logger.http_request_logging
+def api_v1_register():
+    return auth_controller.register()
+
+
 @router.route("/api/v1/login", methods=['POST'])
 @logger.http_request_logging
 def api_v1_login():
