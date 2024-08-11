@@ -13,13 +13,6 @@ const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 )
 
-const token = localStorage.getItem('token')
-if (token === null || token === undefined) {
-    if (window.location.pathname !== '/login') {
-        window.location.href = '/login'
-    }
-}
-
 root.render(
     <React.StrictMode>
         <App />
