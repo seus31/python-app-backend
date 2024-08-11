@@ -14,6 +14,7 @@ class SystemConfig:
     })
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ECHO = False
+    JWT_SECRET_KEY = settings.JWT_SECRET_KEY
 
 
 Config = SystemConfig
