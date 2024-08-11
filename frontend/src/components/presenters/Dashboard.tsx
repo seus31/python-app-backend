@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { Title } from '@mui/icons-material'
 import { Container, Grid, Typography } from '@mui/material'
 import Layout from '../common/Layout'
 import StyledPaper from '../common/styled/StyledPaper'
@@ -17,17 +16,6 @@ const Dashboard = (props: DashboardProps) => {
             </Grid>
           </Grid>
         </StyledPaper>
-      </Container>
-      <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <StyledPaper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-              <React.Fragment>
-                <Title>ダッシュボード</Title>
-              </React.Fragment>
-            </StyledPaper>
-          </Grid>
-        </Grid>
       </Container>
     </Layout>
   )
