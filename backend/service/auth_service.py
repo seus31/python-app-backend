@@ -1,6 +1,6 @@
 from flask import make_response, request, jsonify
 from flask_jwt_extended import create_access_token
-from model.user import User, UserSchema
+from model.user import User
 from werkzeug.security import check_password_hash, generate_password_hash
 
 
@@ -29,14 +29,12 @@ def register_logic():
 
     hashed_password = generate_password_hash(password)
     new_user = User(name=username, email=email, password=hashed_password).create_user()
-    user_schema = UserSchema(many=False)
 
-    return make_response(
-        jsonify({
-            'code': 201,
-            'user': user_schema.dump(new_user)
-        })
-    )
+    access_token = create_access_token(identity=new_user.id)
+    return make_response(jsonify({
+        'code': 200,
+        'access_token': access_token
+    }))
 
 
 def login_logic():
