@@ -1,47 +1,39 @@
-import React from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import LoginForm from '../presenters/LoginForm'
-import { useMutation, useQuery } from '@apollo/client'
-import { useNavigate } from 'react-router-dom'
-import { Box, LinearProgress } from '@mui/material'
-import {removeAccessToken, removeStatus, setAccessToken, setStatus} from '../../libs/auth'
-//import { LoggedInAdministratorDocument, SignInMutationDocument } from '../../generated/graphql'
+import axios from 'axios'
+import { useApi } from '../../providers/ApiContext'
+import { useAuth } from '../../providers/AuthContext'
 
 const LoginContainer = () => {
-    const navigate = useNavigate()
-    // const [signIn] = useMutation(SignInMutationDocument)
-    // const { loading, data } = useQuery(LoggedInAdministratorDocument, { variables: { token: localStorage.getItem('token') } })
-    //
-    // if (loading) {
-    //     return (
-    //         <Box sx={{ width: '100%' }}>
-    //             <LinearProgress />
-    //         </Box>
-    //     )
-    // } else if (data?.loggedAdministrator.token) {
-    //     window.location.href = '/'
-    // } else {
-    //     removeStatus()
-    //     removeAccessToken()
-    // }
-    //
-    // const handleLoginSuccess = async (credentialResponse: CredentialResponse) => {
-    //     const { data } = await signIn({ variables: { input: { code: credentialResponse.credential } }})
-    //
-    //     if (data.signIn.token !== null) {
-    //         setAccessToken(data.signIn.token)
-    //         setStatus('loggedIn')
-    //         navigate('/')
-    //     } else {
-    //         alert(data.signIn.errors[0])
-    //     }
-    // }
-    //
-    // const handleLoginError = async () => {
-    //     console.log('login failed!')
-    // }
+    const apiUrl = useApi()
+    const apiEndpoint = apiUrl + '/login'
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const { login } = useAuth()
 
-    return (
-        <LoginForm />
+    const handleLogin = async (e: { preventDefault: () => void }) => {
+        e.preventDefault()
+        try {
+            const response = await axios.post(apiEndpoint, { email, password }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            login(response.data.access_token)
+        } catch (error) {
+        }
+    }
+
+    const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value)
+    };
+
+    const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setPassword(e.target.value)
+    };
+
+  return (
+        <LoginForm handleLogin={handleLogin} handleEmailChange={handleEmailChange} handlePasswordChange={handlePasswordChange} />
     )
 }
 

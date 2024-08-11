@@ -10,19 +10,16 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 
-export default function LoginForm() {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        const data = new FormData(event.currentTarget)
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        })
-    }
+interface LoginFormProps {
+    handleLogin?: (e: { preventDefault: () => void }) => Promise<void>,
+    handleEmailChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    handlePasswordChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
 
+export default function LoginForm(props: LoginFormProps) {
     return (
         <Container component="main" maxWidth="xs">
-            <CssBaseline />
+            <CssBaseline/>
             <Box
                 sx={{
                     marginTop: 8,
@@ -31,13 +28,13 @@ export default function LoginForm() {
                     alignItems: 'center',
                 }}
             >
-                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                    <LockOutlinedIcon />
+                <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+                    <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                <Box component="form" onSubmit={props.handleLogin} noValidate sx={{mt: 1}}>
                     <TextField
                         margin="normal"
                         required
@@ -47,6 +44,7 @@ export default function LoginForm() {
                         name="email"
                         autoComplete="email"
                         autoFocus
+                        onChange={props.handleEmailChange}
                     />
                     <TextField
                         margin="normal"
@@ -57,16 +55,17 @@ export default function LoginForm() {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        onChange={props.handlePasswordChange}
                     />
                     <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
+                        control={<Checkbox value="remember" color="primary"/>}
                         label="Remember me"
                     />
                     <Button
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{mt: 3, mb: 2}}
                     >
                         Sign In
                     </Button>
