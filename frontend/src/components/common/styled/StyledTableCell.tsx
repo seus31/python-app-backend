@@ -1,4 +1,3 @@
-
 import * as React from 'react'
 import MuiTableCell, { TableCellProps } from '@mui/material/TableCell'
 import { styled } from '@mui/material/styles'

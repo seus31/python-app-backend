@@ -3,7 +3,6 @@ import { Navigate } from 'react-router-dom'
 import Dashboard from '../presenters/Dashboard'
 import { useAuth } from '../../providers/AuthContext'
 
-
 const DashboardContainer = () => {
   const { token, logout } = useAuth();
 

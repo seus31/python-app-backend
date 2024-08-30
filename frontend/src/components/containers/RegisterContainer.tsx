@@ -3,7 +3,7 @@ import RegisterForm from '../presenters/RegisterForm'
 import axios from 'axios'
 import { useApi } from '../../providers/ApiContext'
 import { useAuth } from '../../providers/AuthContext'
-import {Navigate} from "react-router-dom";
+import { Navigate } from 'react-router-dom'
 
 const RegisterContainer = () => {
   const apiUrl = useApi()
