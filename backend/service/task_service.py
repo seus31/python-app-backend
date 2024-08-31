@@ -32,3 +32,12 @@ def get_tasks_logic():
         'code': 200,
         'tasks': task_schema.dump(tasks)
     }))
+
+
+def get_task_logic(task_id):
+    task = Task.query.get_or_404(task_id)
+    task_schema = TaskSchema()
+    return make_response(jsonify({
+        'code': 200,
+        'task': task_schema.dump(task)
+    }))
