@@ -68,6 +68,13 @@ def api_v1_tasks_gete_tasks():
     return task_controller.get_tasks()
 
 
+@router.route('/api/v1/tasks/<int:task_id>', methods=['GET'])
+@logger.http_request_logging
+@jwt_required()
+def get_task(task_id):
+    return task_controller.get_task(task_id)
+
+
 @router.after_request
 def after_request(response):
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
