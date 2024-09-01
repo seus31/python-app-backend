@@ -75,6 +75,13 @@ def get_task(task_id):
     return task_controller.get_task(task_id)
 
 
+@router.route('/api/v1/tasks/<int:task_id>', methods=['PUT'])
+@logger.http_request_logging
+@jwt_required()
+def update_task(task_id):
+    return task_controller.update_task(task_id)
+
+
 @router.route('/api/v1/tasks/<int:task_id>', methods=['DELETE'])
 @logger.http_request_logging
 @jwt_required()
