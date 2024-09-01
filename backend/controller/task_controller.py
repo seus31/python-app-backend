@@ -1,6 +1,7 @@
 from service.task_service import post_task_logic
 from service.task_service import get_tasks_logic
 from service.task_service import get_task_logic
+from service.task_service import delete_task_logic
 
 
 def post_task():
@@ -13,3 +14,7 @@ def get_tasks():
 
 def get_task(task_id):
     return get_task_logic(task_id)
+
+
+def delete_task(task_id):
+    return delete_task_logic(task_id)
