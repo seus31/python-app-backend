@@ -35,6 +35,12 @@ class Task(db.Model):
         else:
             return task_list
 
+    def update_task(self, updated_data):
+        for key, value in updated_data.items():
+            setattr(self, key, value)
+
+        db.session.commit()
+
     def delete_task(self):
         db.session.delete(self)
         db.session.commit()
