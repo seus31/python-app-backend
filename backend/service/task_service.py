@@ -1,4 +1,5 @@
 from flask import make_response, request, jsonify
+from marshmallow import ValidationError
 from model.task import Task, TaskSchema
 
 
@@ -37,6 +38,24 @@ def get_tasks_logic():
 def get_task_logic(task_id):
     task = Task.query.get_or_404(task_id)
     task_schema = TaskSchema()
+    return make_response(jsonify({
+        'code': 200,
+        'task': task_schema.dump(task)
+    }))
+
+
+def update_task_logic(task_id):
+    task = Task.query.get_or_404(task_id)
+    data = request.json
+
+    try:
+        task_schema = TaskSchema()
+        updated_data = task_schema.load(data, partial=True)
+    except ValidationError as err:
+        return jsonify(err.messages), 400
+
+    task.update_task(updated_data)
+
     return make_response(jsonify({
         'code': 200,
         'task': task_schema.dump(task)
