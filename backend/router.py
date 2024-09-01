@@ -75,6 +75,13 @@ def get_task(task_id):
     return task_controller.get_task(task_id)
 
 
+@router.route('/api/v1/tasks/<int:task_id>', methods=['DELETE'])
+@logger.http_request_logging
+@jwt_required()
+def delete_task(task_id):
+    return task_controller.delete_task(task_id)
+
+
 @router.after_request
 def after_request(response):
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
