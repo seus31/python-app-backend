@@ -35,6 +35,10 @@ class Task(db.Model):
         else:
             return task_list
 
+    def delete_task(self):
+        db.session.delete(self)
+        db.session.commit()
+
 
 class TaskSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
