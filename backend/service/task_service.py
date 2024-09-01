@@ -41,3 +41,13 @@ def get_task_logic(task_id):
         'code': 200,
         'task': task_schema.dump(task)
     }))
+
+
+def delete_task_logic(task_id):
+    task = Task.query.get_or_404(task_id)
+    task.delete_task()
+
+    return make_response(jsonify({
+        'code': 200,
+        'message': 'Task deleted successfully'
+    }))
