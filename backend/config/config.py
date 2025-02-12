@@ -1,3 +1,4 @@
+import datetime
 import settings
 
 
@@ -15,6 +16,7 @@ class SystemConfig:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ECHO = False
     JWT_SECRET_KEY = settings.JWT_SECRET_KEY
+    JWT_ACCESS_TOKEN_EXPIRES = datetime.timedelta(minutes=15)
 
 
 Config = SystemConfig
